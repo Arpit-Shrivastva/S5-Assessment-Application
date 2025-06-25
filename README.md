@@ -44,18 +44,15 @@ An end-to-end full-stack web application built for managing and tracking S5 audi
 - Update role and username
 - Delete users (Admin only)
 
-### 📄 Reports
-- Download and print audit reports (PDF export planned)
-
 ### 📁 Clone the Repository
 
 git clone https://github.com/<your-username>/s5-assessment-app.git
 
 
 ## 🔐 Default Roles
-Role	Access
-ADMIN	Full access to users, audits, and dashboard
-AUDITOR	Can perform and view audits
+Role	Access <br>
+ADMIN	Full access to users, audits, and dashboard <br>
+AUDITOR	Can perform and view audits <br>
 OPERATOR	Limited access to assigned audit tasks
 
 ## 📁 Folder Structure
