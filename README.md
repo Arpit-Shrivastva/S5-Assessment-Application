@@ -55,8 +55,10 @@ ADMIN	Full access to users, audits, and dashboard <br>
 AUDITOR	Can perform and view audits <br>
 OPERATOR	Limited access to assigned audit tasks
 
+
 ## 📁 Folder Structure
 
+```
 s5-assessment-app/
 │
 ├── backend/               # Spring Boot Backend
@@ -74,3 +76,4 @@ s5-assessment-app/
 │   │   ├── models/
 │   │   └── pages/
 │   └── tailwind.config.js
+```
