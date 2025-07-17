@@ -1,0 +1,27 @@
+<h2 class="text-2xl font-bold text-indigo-700 mb-4 text-center">Update Employee</h2>
+
+<form [formGroup]="updateForm" (ngSubmit)="onUpdate()" class="space-y-5">
+
+    <!-- Username -->
+    <mat-form-field appearance="fill" class="w-full">
+        <mat-label>name</mat-label>
+        <input matInput formControlName="name" placeholder="Update name">
+        <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+
+    <!-- Role -->
+    <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+            <mat-option *ngFor="let r of roles" [value]="r">{{ r.replace('ROLE_', '') }}</mat-option>
+        </mat-select>
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+    </mat-form-field>
+
+    <!-- Buttons -->
+    <div class="flex justify-end gap-4 pt-4">
+        <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" [disabled]="updateForm.invalid">Update</button>
+    </div>
+
+</form>

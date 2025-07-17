@@ -1,0 +1,57 @@
+<div class="pt-10"></div>
+<div class="bg-[#489fb5] flex min-h-screen overflow-hidden">
+
+    <!-- Left Section: Form -->
+    <div class="w-1/2 flex items-center justify-center">
+        <div class="bg-white shadow-2xl rounded-3xl px-10 py-12 w-full max-w-md border border-gray-200">
+
+            <h2 class="text-4xl font-extrabold text-center text-blue-700 mb-2">Welcome Back!</h2>
+            <p class="text-center text-sm text-gray-500 mb-8">Please login to your account</p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <!-- Email -->
+                <mat-form-field appearance="fill" class="w-full mb-5">
+                    <mat-label>Email</mat-label>
+                    <mat-icon matPrefix>email</mat-icon>
+                    <input matInput type="email" placeholder="e.g. user@example.com" formControlName="email" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="w-full mb-6">
+                    <mat-label>Password</mat-label>
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <input matInput type="password" placeholder="Enter your password" formControlName="password"
+                        required>
+                </mat-form-field>
+
+
+                <!-- Login Button -->
+                <!-- <button mat-raised-button color="primary"
+                    class="w-full py-3 text-lg font-semibold tracking-wide rounded-md shadow-md hover:bg-blue-600 transition duration-300"
+                    [disabled]="loginForm.invalid">
+                    Login
+                </button> -->
+                <!-- Login Button -->
+                <button mat-raised-button color="primary"
+                    class="w-full py-3 text-lg font-semibold tracking-wide rounded-md shadow-md hover:bg-blue-600 transition duration-300"
+                    [disabled]="loginForm.invalid || loading">
+                    <mat-spinner *ngIf="loading" diameter="24"></mat-spinner>
+                    <span *ngIf="!loading">Login</span>
+                </button>
+
+            </form>
+
+            <!-- Extra Links -->
+            <div class="mt-6 text-center">
+                <p href="" class="text-blue-500 text-center block mt-4 text-lg hover:underline cursor-pointer"
+                    (click)="forgotPassword()">
+                    Forgotten password?</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Right Section: Image -->
+    <div class="w-1/2 flex items-center justify-center">
+        <img src="../../../assets/login.svg" alt="login" class="max-w-[90%] h-auto object-contain" />
+    </div>
+</div>

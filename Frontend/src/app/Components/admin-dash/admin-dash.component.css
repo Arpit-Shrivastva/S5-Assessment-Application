@@ -1,0 +1,7 @@
+.nav-link {
+    @apply px-4 py-2 rounded-md text-[0.95rem] text-gray-700 font-medium transition-all duration-200 cursor-pointer;
+}
+
+.nav-link:hover {
+    @apply bg-indigo-100 text-indigo-800 shadow-sm;
+}

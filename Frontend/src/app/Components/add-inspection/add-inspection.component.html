@@ -1,0 +1,79 @@
+<!-- 🔹 Top space -->
+<div class="h-16"></div>
+
+<form [formGroup]="auditForm" (ngSubmit)="onSubmit()" class="p-6 bg-white border border-gray-300 rounded shadow-md">
+
+    <!-- 🔷 Title -->
+    <h2 class="text-center text-blue-700 text-2xl font-bold mb-6">5S AUDIT CHECKLIST - FACTORY</h2>
+
+    <!-- 🔹 Audit Header -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Zone</mat-label>
+            <input matInput formControlName="zone" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Zone Leader</mat-label>
+            <input matInput formControlName="zoneLeader" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Audit Date</mat-label>
+            <input matInput formControlName="auditDate" [matDatepicker]="picker" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <!-- 🔹 Table -->
+    <div formArrayName="entries" class="overflow-x-auto border rounded-lg">
+        <table class="min-w-full text-sm table-auto border-collapse">
+            <thead class="bg-blue-100 text-gray-700 font-semibold">
+                <tr>
+                    <th class="border p-2 text-left">Focus Area</th>
+                    <th class="border p-2 text-center">#</th>
+                    <th class="border p-2 text-left">Observation</th>
+                    <th class="border p-2 text-left">Remarks</th>
+                    <th class="border p-2 text-center">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let entry of entries.controls; let i = index" [formGroupName]="i" class="hover:bg-gray-50">
+                    <td class="border p-2">{{ getFocusArea(i) }}</td>
+                    <td class="border p-2 text-center">{{ i + 1 }}</td>
+                    <td class="border p-2">{{ entry.value.observation }}</td>
+                    <td class="border p-2">
+                        <mat-form-field appearance="fill" class="w-full">
+                            <input matInput formControlName="remarks" placeholder="Remarks..." />
+                        </mat-form-field>
+                    </td>
+                    <td class="border p-2 text-center">
+                        <mat-form-field appearance="fill" class="w-20">
+                            <input matInput type="number" formControlName="score" />
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 🔻 Footer Inputs: Audited By, Total Score -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Audited By</mat-label>
+            <input matInput formControlName="auditedBy" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Total Score</mat-label>
+            <input matInput [value]="calculateTotalScore()" readonly />
+        </mat-form-field>
+    </div>
+
+    <!-- 🔘 Submit -->
+    <div class="text-center mt-6">
+        <button mat-flat-button color="primary" class="px-6 py-2">Submit Audit</button>
+    </div>
+
+</form>

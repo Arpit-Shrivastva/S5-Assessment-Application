@@ -1,0 +1,89 @@
+<!-- Admin Dashboard Layout -->
+<div class="flex pt-24 min-h-screen bg-gray-100">
+
+    <!-- 🧭 Sidebar -->
+    <aside
+        class="w-64 bg-white shadow-xl fixed top-24 left-0 z-40 h-[calc(100vh-6rem)] rounded-tr-2xl rounded-br-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-300 scrollbar-track-indigo-100">
+    
+        <nav class="flex flex-col p-5 gap-1">
+            <!-- 🧭 Title -->
+            <h2 class="text-[1.2rem] font-bold text-indigo-700 mb-4 border-b pb-3 flex items-center gap-2">
+                <mat-icon color="primary">dashboard</mat-icon>
+                Admin Panel
+            </h2>
+    
+            <!-- 🔗 Links -->
+            <a routerLink="/create-employee" class="nav-link">
+                ➕ Add Employee
+            </a>
+    
+            <a routerLink="/all-employees" class="nav-link">
+                👥 All Employees
+            </a>
+    
+            <a routerLink="/create-audit" class="nav-link">
+                📋 Add Audit
+            </a>
+    
+            <a routerLink="/audit-dashboard" class="nav-link">
+                📊 Audit Dashboard
+            </a>
+    
+            <a routerLink="/audit-inspection" class="nav-link">
+                🧾 Audit Inspection Form
+            </a>
+    
+            <a routerLink="/inspection-list" class="nav-link">
+                📑 All Audit Inspections
+            </a>
+    
+            <a routerLink="/add-assessment" class="nav-link">
+                📝 Add Assessment
+            </a>
+    
+            <a routerLink="/assessment-dashboard" class="nav-link">
+                📈 Assessment Dashboard
+            </a>
+    
+            <!-- 🔴 Logout Button -->
+            <button (click)="logout()"
+                class="w-full mt-5 px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all text-[0.9rem] font-semibold shadow">
+                ↪️ Logout
+            </button>
+        </nav>
+    </aside>
+
+
+
+    <!-- 📋 Main Content Area -->
+    <main class="flex-1 ml-64 p-8">
+        <div class="bg-white rounded-2xl shadow-lg p-10 text-center">
+            <h1 class="text-4xl font-extrabold text-indigo-600 mb-4">Welcome, Admin 👋</h1>
+            <p class="text-lg text-gray-600">
+                You can manage employees, view reports, and control the system from here.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="bg-indigo-50 p-6 rounded-xl shadow text-center">
+                    <h3 class="text-xl font-semibold text-indigo-700">Total Employees</h3>
+                    <p class="text-3xl font-bold text-indigo-900 mt-2">{{totalEmp}}</p>
+                </div>
+                <div class="bg-purple-50 p-6 rounded-xl shadow text-center">
+                    <h3 class="text-xl font-semibold text-purple-700">Total Audit</h3>
+                    <p class="text-3xl font-bold text-purple-900 mt-2">{{totalAudit}}</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl shadow text-center">
+                    <h3 class="text-xl font-semibold text-green-700">Total Inspection</h3>
+                    <p class="text-3xl font-bold text-green-900 mt-2">{{totalInsprction}}</p>
+                </div>
+
+                <div class="bg-green-50 p-6 rounded-xl shadow text-center">
+                    <h3 class="text-xl font-semibold text-green-700">Total Assessment</h3>
+                        <p class="text-3xl font-bold text-green-900 mt-2">{{totalAssessments}}</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>

@@ -1,0 +1,67 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center py-20 px-6">
+    <div class="bg-white shadow-2xl rounded-3xl flex flex-col md:flex-row w-full max-w-6xl overflow-hidden">
+
+        <!-- 📸 Image Side -->
+        <div class="hidden md:block md:w-1/2 bg-indigo-50 flex items-center justify-center">
+            <img src="../../../assets/audit.svg" alt="Audit" class="w-4/5 h-auto p-6">
+        </div>
+
+        <!-- 📝 Form Side -->
+        <div class="w-full md:w-1/2 p-8 md:p-12">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-8 text-center">Create Audit Report</h2>
+
+            <form [formGroup]="auditForm" (ngSubmit)="submitAudit()">
+
+                <!-- Location -->
+                <mat-form-field appearance="fill" class="w-full mb-4">
+                    <mat-label>Location</mat-label>
+                    <input matInput formControlName="location" placeholder="e.g. Mumbai Plant" required>
+                </mat-form-field>
+
+                <!-- Audit Name -->
+                <mat-form-field appearance="fill" class="w-full mb-4">
+                    <mat-label>Audit Name</mat-label>
+                    <input matInput formControlName="auditName" placeholder="e.g. Safety Check" required>
+                </mat-form-field>
+
+                <!-- Score -->
+                <mat-form-field appearance="fill" class="w-full mb-4">
+                    <mat-label>Score</mat-label>
+                    <input matInput type="number" formControlName="score" placeholder="e.g. 78.5" required>
+                </mat-form-field>
+
+                <!-- Status -->
+                <mat-form-field appearance="fill" class="w-full mb-4">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status" required>
+                        <mat-option value="Pending">Pending</mat-option>
+                        <mat-option value="Completed">Completed</mat-option>
+                        <mat-option value="InProgress">InProgress</mat-option>
+                        <mat-option value="Rejected">Rejected</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Auto Date (disabled) -->
+                <!-- Wrap Date + Button in a flex row -->
+                <div class="flex flex-col md:flex-row gap-4 items-center">
+                
+                    <!-- Auto Date (disabled) -->
+                    <mat-form-field appearance="fill" class="w-full md:w-1/2">
+                        <mat-label>Date</mat-label>
+                        <input matInput [value]="today" disabled>
+                    </mat-form-field>
+                
+                    <!-- Submit Button -->
+                    <button mat-raised-button color="primary" class="w-full md:w-1/2 py-3 text-lg font-semibold" type="submit"
+                        [disabled]="auditForm.invalid">
+                        🚀 Submit Audit
+                    </button>
+                
+                </div>
+  
+
+            </form>
+        </div>
+    </div>
+</div>
+  

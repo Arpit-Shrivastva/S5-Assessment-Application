@@ -1,0 +1,82 @@
+<div class="p-6 font-sans mt-24">
+    <h2 class="text-2xl font-bold text-white bg-gray-800 p-4 rounded-md text-center">
+        5S Assessment Dashboard
+    </h2>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap justify-around my-6 gap-4">
+        <div class="flex items-center gap-2">
+            <label class="font-semibold">Date:</label>
+            <input type="date" class="border rounded px-2 py-1" />
+        </div>
+        <!-- Scope Dropdown -->
+        <div class="flex items-center gap-2">
+            <label class="font-semibold">Scope:</label>
+            <select [(ngModel)]="scope" class="border rounded px-2 py-1 bg-white">
+                <option value="">-- Select Scope --</option>
+                <option *ngFor="let option of scopeOptions" [value]="option">{{ option }}</option>
+            </select>
+            <button (click)="onScopeSearch()" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+                Search
+            </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <label class="font-semibold">Auditor:</label>
+            <input [(ngModel)]="auditor" type="text" class="border rounded px-2 py-1"
+                placeholder="Enter Auditor Name" />
+            <button (click)="onAuditorSearch()" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
+                Search
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Bar Chart + Comments Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <!-- Bar Chart -->
+        <div class="bg-gray-100 p-4 rounded-md shadow">
+            <h4 class="font-semibold mb-2">Compliance rate per stage</h4>
+            <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'"></canvas>
+        </div>
+
+        <!-- Comments Box -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+        
+            <!-- 🧑 Auditor Name -->
+            <p class="text-sm text-gray-500 mb-2 italic">
+                Commented by: <span class="text-indigo-600 font-medium">{{ auditor || 'Unknown Auditor' }}</span>
+            </p>
+        
+            <!-- 💬 Comment Section -->
+            <h4 class="text-lg font-bold text-indigo-700 mb-3 flex items-center gap-2">
+                <mat-icon class="text-indigo-500">comment</mat-icon>
+                Auditor's Comment
+            </h4>
+        
+            <div
+                class="bg-gray-50 border border-indigo-200 rounded-lg p-5 text-gray-800 min-h-[150px] text-base leading-relaxed">
+                {{ comment || 'No comments available.' }}
+            </div>
+        </div>
+          
+          
+    </div>
+
+    <!-- Legend -->
+    <div class="flex justify-center gap-6 mb-4">
+        <span class="text-green-600 font-semibold">Compliant</span>
+        <span class="text-yellow-500 font-semibold">Partially Compliant</span>
+        <span class="text-red-600 font-semibold">Non-compliant</span>
+    </div>
+
+    <!-- Doughnut Charts Section -->
+    <div class="flex flex-wrap justify-around gap-6">
+        <div *ngFor="let chart of doughnutCharts" class="text-center">
+            <h5 class="font-medium mb-2">{{ chart.stage }}</h5>
+            <div class="w-40 h-40 mx-auto">
+                <canvas baseChart [data]="chart.data" [type]="'doughnut'" [options]="doughnutOptions"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

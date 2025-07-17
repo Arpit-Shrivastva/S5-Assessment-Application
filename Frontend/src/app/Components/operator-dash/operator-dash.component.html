@@ -1,0 +1,67 @@
+<!-- Admin Dashboard Layout -->
+<div class="flex pt-24 min-h-screen bg-gray-100">
+
+    <!-- 🧭 Sidebar -->
+    <aside class="w-64 bg-white shadow-md h-[calc(100vh-6rem)] fixed top-24 left-0 z-40 rounded-tr-xl rounded-br-xl">
+        <nav class="flex flex-col p-4 gap-4">
+            <h2 class="text-xl font-bold text-indigo-700 mb-4 border-b pb-2">Operator Panel</h2>
+
+
+            <a routerLink="/audit-dashboard"
+                class="px-4 py-2 rounded-lg hover:bg-indigo-100 text-gray-700 font-medium transition">
+                📊 Audit Dashboard
+            </a>
+
+            <a routerLink="/audit-inspection"
+                class="px-4 py-2 rounded-lg hover:bg-indigo-100 text-gray-700 font-medium transition">
+                🧾 Audit Inspection Form
+            </a>
+
+            <a routerLink="/inspection-list" class="px-4 py-2 rounded-lg hover:bg-indigo-100 text-gray-700 font-medium transition">
+                📑 All Audit Inspections 
+            </a>
+
+            <a routerLink="/assessment-dashboard"
+                class="px-4 py-2 rounded-lg hover:bg-indigo-100 text-gray-700 font-medium transition">
+                📈 Assessment Dashboard
+            </a>
+
+            <!-- 🔴 Logout Button -->
+            <button (click)="logout()"
+                class="w-full px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all text-sm font-semibold shadow">
+                ↪️ Logout
+            </button>
+
+        </nav>
+    </aside>
+
+
+    <!-- 📋 Main Content Area -->
+    <main class="flex-1 ml-64 p-8">
+        <div class="bg-white rounded-2xl shadow-lg p-10 text-center">
+            <h1 class="text-4xl font-extrabold text-indigo-600 mb-4">Welcome, Operator 👋</h1>
+            <p class="text-lg text-gray-600">
+                You can View Audit,view Assessment, view reports from here.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+
+                <div class="bg-purple-50 p-6 rounded-xl shadow text-center">
+                    <h3 class="text-xl font-semibold text-purple-700">Total Audit</h3>
+                    <p class="text-3xl font-bold text-purple-900 mt-2">{{totalAudit}}</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl shadow text-center">
+                    <h3 class="text-xl font-semibold text-green-700">Total Inspection</h3>
+                    <p class="text-3xl font-bold text-green-900 mt-2">{{totalInsprction}}</p>
+                </div>
+                
+                <div class="bg-green-50 p-6 rounded-xl shadow text-center">
+                    <h3 class="text-xl font-semibold text-green-700">Total Assessment</h3>
+                    <p class="text-3xl font-bold text-green-900 mt-2">{{totalAssessments}}</p>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+</div>

@@ -1,0 +1,103 @@
+<div class="pt-28 px-8 pb-16 bg-gray-100 min-h-screen">
+    <!-- 🔹 Top Section: Bar Chart + Mini Doughnuts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+        <!-- 📅 Recent 10 Days Audits (Bar Chart) -->
+        <div class="bg-white p-6 rounded-xl shadow-md">
+            <h2 class="text-lg font-semibold mb-4">📅 Audits in Last 10 Days</h2>
+            <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'">
+            </canvas>
+        </div>
+
+        <!-- 📊 4 Mini Progress-wise Doughnut Charts -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <ng-container *ngFor="let item of doughnutStatus">
+                <div class="bg-white p-4 rounded-xl shadow-md">
+                    <h2 class="text-sm font-medium text-center mb-2">{{ item.label }}</h2>
+                    <canvas baseChart [data]="item.chartData" [options]="doughnutChartOptions" [type]="'doughnut'"
+                        [plugins]="[]">
+                    </canvas>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+
+    <!-- 🔍 Search Audit by Location -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+        <!-- 🔍 Search by Location -->
+        <div class="bg-white p-6 rounded-xl shadow-md w-full">
+            <h3 class="text-lg font-semibold mb-3">🔍 Search Audit by Location</h3>
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Enter Location</mat-label>
+                <input matInput [(ngModel)]="searchLocation" />
+            </mat-form-field>
+            <button mat-flat-button color="primary" class="mt-4" (click)="filterByLocation()">Search</button>
+        </div>
+
+        <!-- 📅 Search by Date Range -->
+        <div class="bg-white p-6 rounded-xl shadow-md w-full">
+            <h3 class="text-lg font-semibold mb-3">📅 Search Audit by Date Range</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
+                <div>
+                    <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+                    <input type="date" [(ngModel)]="startDate" name="startDate"
+                        class="border rounded-md px-3 py-2 w-full" />
+                </div>
+
+                <div>
+                    <label for="endDate" class="block text-sm font-medium text-gray-700">End Date</label>
+                    <input type="date" [(ngModel)]="endDate" name="endDate"
+                        class="border rounded-md px-3 py-2 w-full" />
+                </div>
+
+                <div>
+                    <button (click)="searchByDateRange()"
+                        class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+                        Search
+                    </button>
+                </div>
+
+                <!-- ✅ Clear Button -->
+                <div>
+                    <button (click)="clearDateFilter()"
+                        class="w-full bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 📋 List of All Audits -->
+    <div class="bg-white p-6 rounded-xl shadow-md w-full overflow-x-auto">
+        <h3 class="text-lg font-semibold mb-4">📋 List of Audits</h3>
+        <table class="w-full table-auto border-collapse text-sm">
+            <thead>
+                <tr class="bg-gray-200 text-left">
+                    <th class="p-2">Name</th>
+                    <th class="p-2">Location</th>
+                    <th class="p-2">Status</th>
+                    <th class="p-2">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let audit of audits" class="hover:bg-gray-100">
+                    <td class="p-2">{{ audit.auditName }}</td>
+                    <td class="p-2">{{ audit.location }}</td>
+                    <td class="p-2">{{ audit.status }}</td>
+                    <td class="p-2">{{ audit.date | date: 'yyyy-MM-dd' }}</td>
+                    <td class="p-2" *ngIf="userRole === 'ROLE_ADMIN'">
+                        <button (click)="deleteAuditById(audit.id)"
+                            class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 text-xs">
+                            Delete
+                        </button>
+                    </td>
+                </tr>                  
+            </tbody>
+        </table>
+    </div>
+
+</div>

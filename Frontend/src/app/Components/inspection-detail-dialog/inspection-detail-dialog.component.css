@@ -1,0 +1,19 @@
+mat-card {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px;
+}
+
+th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+}

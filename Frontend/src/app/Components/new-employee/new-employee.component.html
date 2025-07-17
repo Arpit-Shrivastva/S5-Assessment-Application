@@ -1,0 +1,66 @@
+<div
+    class="min-h-screen flex items-center justify-center bg-[#d8e2dc] overflow-hidden">
+
+    <!-- Decorative Pattern (Optional) -->
+    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] z-0">
+    </div>
+
+    <!-- Main Container -->
+    <div class="z-10 flex flex-col md:flex-row gap-10 w-full max-w-6xl items-center justify-center">
+
+        <!-- Illustration -->
+        <div class="w-full md:w-1/2 flex justify-center">
+            <img src="../../../assets/register.svg" alt="Register Illustration"
+                class="w-[85%] max-w-md drop-shadow-2xl animate-fade-in" />
+        </div>
+
+        <!-- Form Card -->
+        <mat-card class="w-full md:w-1/2 max-w-xl p-10 rounded-3xl shadow-2xl bg-white text-gray-800 animate-fade-in mt-12">
+            <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8 tracking-wide">
+                👤 Create New Employee
+            </h2>
+
+            <form [formGroup]="employeeForm" (ngSubmit)="onCreate()" class="space-y-6">
+
+                <!-- Name -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" placeholder="John Doe">
+                    <mat-icon matSuffix>person</mat-icon>
+                </mat-form-field>
+
+                <!-- Email -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" placeholder="john@example.com">
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+
+                <!-- Password -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="••••••••">
+                    <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+
+                <!-- Role Dropdown -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role">
+                        <mat-option *ngFor="let role of roles" [value]="role">👔 {{ role }}</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>supervisor_account</mat-icon>
+                </mat-form-field>
+
+                <!-- Submit Button -->
+                <button mat-raised-button color="primary"
+                    class="w-full py-3 text-lg font-bold rounded-xl shadow-md hover:scale-[1.03] transition duration-300"
+                    [disabled]="employeeForm.invalid">
+                    🚀 Create Employee
+                </button>
+
+            </form>
+        </mat-card>
+    </div>
+</div>
+  

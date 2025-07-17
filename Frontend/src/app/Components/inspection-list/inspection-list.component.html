@@ -1,0 +1,106 @@
+<!-- 🌄 Page Wrapper -->
+<div class="pt-28 pb-12 px-4 md:px-10 bg-gradient-to-br from-slate-100 to-indigo-50 min-h-screen">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- 🔷 Header -->
+        <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+            <h1 class="text-4xl font-extrabold tracking-tight text-gray-800 flex items-center gap-2">
+                <span class="text-indigo-600">🧾</span> Inspection List
+            </h1>
+        </header>
+
+        <!-- 🔍 Search Card -->
+        <mat-card class="mb-8 shadow-xl rounded-2xl">
+            <mat-card-header class="bg-indigo-600 text-white rounded-t-2xl">
+                <mat-card-title class="text-lg font-semibold flex items-center gap-2">
+                    <mat-icon>search</mat-icon> Search Inspections
+                </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="p-6 flex items-center justify-center">
+                <form (submit)="searchByAuditor(); $event.preventDefault()"
+                    class="grid gap-4 md:grid-cols-[2fr_auto_auto] items-end w-full">
+
+                    <!-- Auditor input -->
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Auditor Name</mat-label>
+                        <input matInput [(ngModel)]="searchAuditor" name="auditor" placeholder="e.g. John Doe"
+                            autocomplete="off" />
+                        <button mat-icon-button matSuffix *ngIf="searchAuditor" (click)="clearSearch()" tabindex="-1">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <!-- Buttons -->
+                    <button mat-flat-button color="primary" type="submit"
+                        class="h-12 flex items-center justify-center gap-1">
+                        <mat-icon>search</mat-icon> Search
+                    </button>
+
+                    <button mat-stroked-button color="warn" type="button"
+                        class="h-12 flex items-center justify-center gap-1" (click)="clearSearch()">
+                        <mat-icon>refresh</mat-icon> Reset
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- 📋 Table Card -->
+        <mat-card-content class="p-0">
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                    <!-- 🔹 Table Header -->
+                    <thead>
+                        <tr class="bg-indigo-100 text-gray-700 sticky top-0 z-10">
+                            <th class="p-4 font-medium">#</th>
+                            <th class="p-4 font-medium">Auditor</th>
+                            <th class="p-4 font-medium">Date</th>
+                            <th class="p-4 font-medium">Zone</th>
+                            <th class="p-4 font-medium">Zone Leader</th>
+                            <th class="p-4 font-medium">Total Score</th>
+                            <th *ngIf="role === 'ROLE_ADMIN'" class="p-4 font-medium text-center">Actions</th>
+                        </tr>
+                    </thead>
+        
+                    <!-- 🔸 Table Body -->
+                    <tbody *ngIf="filteredInspections?.length; else noRows">
+                        <tr *ngFor="let inspection of filteredInspections; let i = index"
+                            class="cursor-pointer hover:bg-indigo-50 transition border-b"
+                            (click)="openDetailDialog(inspection)">
+        
+                            <td class="p-4 font-semibold">{{ i + 1 }}</td>
+                            <td class="p-4">{{ inspection.auditedBy }}</td>
+                            <td class="p-4 whitespace-nowrap">{{ inspection.auditDate | date: 'dd MMM yyyy' }}</td>
+                            <td class="p-4">
+                                <mat-chip color="primary" selected>{{ inspection.zone }}</mat-chip>
+                            </td>
+                            <td class="p-4">{{ inspection.zoneLeader }}</td>
+                            <td class="p-4">{{ inspection.totalScore }}</td>
+        
+                            <!-- 🗑️ Delete button (admin only) -->
+                            <td *ngIf="role === 'ROLE_ADMIN'" class="p-4 text-center">
+                                <button mat-icon-button color="warn" matTooltip="Delete"
+                                    (click)="deleteInspection(inspection.id); $event.stopPropagation()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- 🚫 No Data Template -->
+            <ng-template #noRows>
+                <div class="py-10 text-center text-gray-500">
+                    No inspections found.
+                </div>
+            </ng-template>
+        </mat-card-content>
+          
+    </div>
+
+    <!-- 🔄 Loading overlay -->
+    <div *ngIf="loading" class="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-[60]">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+</div>

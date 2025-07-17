@@ -1,0 +1,89 @@
+<div class="container mat-typography grid grid-cols-2 gap-6 p-6">
+    <!-- Left: Image -->
+    <div class="p-4">
+        <img src="../../../assets/assessment.svg" alt="Assessment Banner"
+            class="rounded-xl shadow-lg w-full object-cover" />
+    </div>
+
+    <!-- Right: Form -->
+    <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()" class="bg-white rounded-xl p-6 shadow space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-700">Add 5S Assessment</h2>
+
+        <!-- Stage Dropdown -->
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Scope</mat-label>
+            <input matInput formControlName="scope" />
+        </mat-form-field>
+       
+        <!-- Auditor -->
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Auditor</mat-label>
+            <input matInput formControlName="auditor" />
+        </mat-form-field>
+
+        <!-- Date -->
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Date</mat-label>
+            <input matInput type="date" formControlName="date" />
+        </mat-form-field>
+
+        <!-- Comment -->
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Comment</mat-label>
+            <textarea matInput formControlName="comment"></textarea>
+        </mat-form-field>
+
+        <!-- Stages -->
+        <div formArrayName="stages" *ngFor="let stage of stages.controls; let i = index" class="mt-4">
+            <mat-card class="p-4">
+                <div [formGroupName]="i" class="grid grid-cols-2 gap-4">
+                    
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Scope</mat-label>
+                        <mat-select formControlName="stageName">
+                            <mat-option *ngFor="let option of stageOptions" [value]="option">{{ option }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+            
+
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Compliance Rate (%)</mat-label>
+                        <input matInput type="number" formControlName="complianceRate" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Compliant Percentage (%)</mat-label>
+                        <input matInput type="number" formControlName="compliantPercentage" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Partially Compliant Percentage (%)</mat-label>
+                        <input matInput type="number" formControlName="partiallyCompliantPercentage" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Non Compliant Percentage (%)</mat-label>
+                        <input matInput type="number" formControlName="nonCompliantPercentage" />
+                    </mat-form-field>
+                </div>
+
+                <div class="text-right">
+                    <button mat-button color="warn" type="button" (click)="removeStage(i)" *ngIf="stages.length > 1">
+                        Remove Stage
+                    </button>
+                </div>
+            </mat-card>
+        </div>
+
+        <!-- Add Stage + Submit -->
+        <div class="flex justify-between mt-4">
+            <button mat-flat-button color="primary" type="button" (click)="addStage()">
+                + Add Stage
+            </button>
+            <button mat-flat-button color="accent" type="submit">
+                Submit Assessment
+            </button>
+        </div>
+    </form>
+</div>
+  
