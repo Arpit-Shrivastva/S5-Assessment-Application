@@ -50,8 +50,6 @@ export class UserService {
     return this.http.patch<any>(`${this.baseUrl}/password/${email}`, user);
   }
   
-  
-
   // 🔐 Delete user (ADMIN only)
   deleteUser(email: string, token: string): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`${this.baseUrl}/${email}`, {
