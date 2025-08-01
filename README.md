@@ -46,7 +46,7 @@ An end-to-end full-stack web application built for managing and tracking S5 audi
 
 ### 📁 Clone the Repository
 
-git clone : https://github.com/<your-username>s5-assessment-app.git
+git clone : https://github.com/{username}s5-assessment-app.git
 
 
 ## 🔐 Default Roles
